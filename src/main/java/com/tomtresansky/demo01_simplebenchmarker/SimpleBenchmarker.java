@@ -1,14 +1,21 @@
-package com.tomtresansky.demo01;
+package com.tomtresansky.demo01_simplebenchmarker;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
 /**
- * A naive attempt at Stopwatch Benchmarking.
+ * A naive attempt at StopWatch Benchmarking.
+ * <p>
+ * Will run code submitted to the {@link #benchmark(String, Runnable)} method
+ * either X times for for Y milliseconds, whichever boundary is hit first. It
+ * will do this Z number of times, where Z comprises some number of "warmup"
+ * iterations followed by some number of "test" iterations. The average amount
+ * of operations/millisecond will be calculated and output at the end.
  * 
  * @author ttresans
  *
- * @see http://www.oracle.com/technetwork/articles/java/architect-benchmarking-2266277.html
+ * @see http://www.oracle.com/technetwork/articles/java/architect-benchmarking-
+ *      2266277.html
  */
 public final class SimpleBenchmarker {
   private final NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
@@ -37,7 +44,8 @@ public final class SimpleBenchmarker {
 
     long average = 0L;
     
-    System.out.println("Running: " + name + " (" + totalIterations + " iterations)");      
+    System.out.println("Running: " + name);
+    System.out.println(String.format("Iterations: %d, Warmup Iterations: %d, Max Duration/Iteration: %d, Max Times/Iteration: %d", testIterations, warmupIterations, maxDurationMillis, maxLoopIterations));      
 
     for (int i = 0; i < totalIterations; i++) {
       long nops = 0;

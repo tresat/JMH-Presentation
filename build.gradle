@@ -21,7 +21,39 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.8'
 }
 
+// Demo 01 - Simple Benchmarker
+Map<String, String> demo01runs = [
+  run01: 'Run01_Distance',
+  run02: 'Run02_Distance_Constant',
+  run03: 'Run03_Distance_Constant_Nothing',
+  run04: 'Run04_Nothing_Distance_Constant',
+  run05: 'Run05_Nothing',
+  run06: 'Run06_Constant'
+]
+
+demo01runs.each { taskName, taskMainClass -> 
+  task("demo01-$taskName", type: JavaExec) {
+    description = "Runs 'com.tomtresansky.demo01_simplebenchmarker.$taskMainClass'"
+    group = 'Demo01'
+    classpath = sourceSets.main.runtimeClasspath
+    
+    main = "com.tomtresansky.demo01_simplebenchmarker.$taskMainClass"
+  }
+}
+
+task(demo01) {
+  description = 'Runs all Demo 1 benchmarking runs'
+  group = 'Demo01'
+  
+//  doFirst {
+//    println tasks.findAll { task -> task.name.startsWith('demo01') && task.name != 'demo01' }
+//  }
+}
  
+demo01.dependsOn {
+  tasks.findAll { task -> task.name.startsWith('demo01') && task.name != 'demo01' }
+}
+
 /*
 // Apply the java plugin to add support for Java
 apply plugin: 'java'

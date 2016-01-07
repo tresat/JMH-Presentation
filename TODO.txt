@@ -1,0 +1,1 @@
+- Gradle task to run all of demo 1 and write timings to a file

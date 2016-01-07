@@ -1,4 +1,4 @@
-package com.tomtresansky.demo01;
+package com.tomtresansky.demo01_simplebenchmarker;
 
 /**
  * Demonstrate simple benchmarking of a distance formula implementation.
@@ -27,7 +27,7 @@ Result: distance [ 21,351,205 ops/ms ]
  * 
  * @author ttresans
  */
-public final class Run01 {  
+public final class Run01_Distance {  
   public static void main(String... args) {
     SimpleBenchmarker benchmarker = new SimpleBenchmarker();
     benchmarker.benchmark("distance", () -> Calculator.distance(0.0d, 0.0d, 10.0d, 10.0d));
