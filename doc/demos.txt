@@ -19,12 +19,27 @@ Demo 03
 - WHAT!  Doing NOTHING is slower than either  ...hmmm
 
 This is the first lesson: mixing benchmarks within the same JVM run is wrong
+Irrelevant unless MANY precautions are taken
 Let's change the order
+
+Given enough runs, the virtual machine speculates that run() always dispatches to the same target class, and it can generate very efficient native code. This assumption gets invalidated with the second benchmark, because it introduces a second class to dispatch run() calls to. The virtual machine has to deoptimize the generated code. It eventually generates efficient code to dispatch to either of the seen classes, but this is slower than in the previous case. Similarly, the third benchmark introduces a third implementation of java.lang .Runnable. Its execution gets slower because Java HotSpot VM generates efficient native code for up to two different types at a call site, and then it falls back to a more generic dispatch mechanism for additional types.
+
+This is not the sole factor, though. Indeed, the bench method’s code and the Runnable objects’ code blend when seen by the virtual machine. The virtual machine tries to speculate on the entire code using optimizations such as loop unrolling, method inlining, and on-stack replacements.
+
+Calling System.currentTimeMillis() has an effect on throughput as well, and our benchmarks would need to accurately subtract the time taken for each of these calls. We could also play with different inner-loop upper-bound values and observe very different results.
 
 Demo 04
 - Same as last run, but with NOTHING first, then DISTANCE, then CONSTANT
 - We get the same relative throughput drop figures, with the LAST run being the SLOWEST!
 
-Demo 05 
-- Run each benchmark alone
+Demo 05 and 06
+- Run CONSTANT and NOTHING alone
 - Times come out about EQUAL
+- Going back to the performance evaluation of the distance method, we noted that its throughput was very similar to the throughput measured for a method that would do no computation and return a constant.
+- In fact, Java HotSpot VM used dead-code elimination; since the return value of distance is never used by our java.lang.Runnable under test, it practically removed it. This also happened because the method has no side effect and has a simple control flow that is recursion-free.
+
+Demo 07
+- Use the result of CONSTANT
+- # of OPs has dropped - the VM can no longer ignore the work we're doing
+
+

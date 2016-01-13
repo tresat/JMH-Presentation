@@ -53,6 +53,15 @@ jmh {
 
 jmh {
     jmhVersion = '1.11.2' // 1.11.2 latest as of October 2015
+    
+    include = '.*SampleBenchmark.*'
+    
+    fork = 1
+    warmupIterations = 5
+    iterations = 5
+    timeOnIteration = '3s'
+    jvmArgs = '-server -XX:+AggressiveOpts'
+    verbosity = 'EXTRA'
 }
 
 // Use Shadow Plugin to do actual JMH jar creation

@@ -28,16 +28,19 @@ Map<String, String> demo01runs = [
   run03: 'Run03_Distance_Constant_Nothing',
   run04: 'Run04_Nothing_Distance_Constant',
   run05: 'Run05_Nothing',
-  run06: 'Run06_Constant'
+  run06: 'Run06_Constant',
+  run07: 'Run07_Constant_Using_Result'
 ]
 
 demo01runs.each { taskName, taskMainClass -> 
   task("demo01-$taskName", type: JavaExec) {
-    description = "Runs 'com.tomtresansky.demo01_simplebenchmarker.$taskMainClass'"
-    group = 'Demo01'
     classpath = sourceSets.main.runtimeClasspath
-    
     main = "com.tomtresansky.demo01_simplebenchmarker.$taskMainClass"
+    
+    group = 'Demo01'
+    description = "Runs $main"
+    
+    standardOutput = new FileOutputStream(file("{$taskName}.txt"))
   }
 }
 
