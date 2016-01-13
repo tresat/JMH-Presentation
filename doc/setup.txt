@@ -1,0 +1,24 @@
+SETUP
+
+This assumes you have both Gradle and the Gradle IDE for Eclipse already installed.
+
+To install gradle use GVM - http://sdkman.io/
+To install Gradle IDE for Eclipse search the Eclipse Marketplace for "Gradle Integration for Eclipse"
+
+If you are working with Gradle behind a proxy, you will need to configure Gradle with proxy information so it can download dependencies.
+In your user directory (e.g. c:\users\steve or /users/steve), open the .gradle folder (you may need to enable hidden folders on your file browser). open the gradle.properties file. If it does not exist, create it.
+Add the following lines with the values replaced with the values specific to your proxy:
+systemProp.http.proxyHost=www.proxyhost.org
+systemProp.http.proxyPort=8080
+systemProp.http.proxyUser=userid
+systemProp.http.proxyPassword=password
+systemProp.http.nonProxyHosts=*.nonproxyrepos.com|localhost
+
+1) Run "gradlew eclipse" from the JMH-Presentation directory
+2) Open eclipse, go to Project->Import, choose Type = Gradle project.  Point to the JMH-Presentation directory and include sub-projects.
+
+RUNNING
+
+1) Run "gradlew tasks" from the JMH-Presentation directory to see a list of tasks
+2) Run "gradlew <TASK_NAME> from the JMH-Presentation directory to run that task
+

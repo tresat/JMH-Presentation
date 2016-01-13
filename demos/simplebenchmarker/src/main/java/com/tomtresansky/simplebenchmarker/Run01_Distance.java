@@ -1,4 +1,4 @@
-package com.tomtresansky.demo01_simplebenchmarker;
+package com.tomtresansky.simplebenchmarker;
 
 /**
  * Demonstrate simple benchmarking of a distance formula implementation.

@@ -1,4 +1,4 @@
-package com.tomtresansky.demo01_simplebenchmarker;
+package com.tomtresansky.simplebenchmarker;
 
 public final class Calculator {
   public static double distance(double x1, double x2, double y1, double y2) {

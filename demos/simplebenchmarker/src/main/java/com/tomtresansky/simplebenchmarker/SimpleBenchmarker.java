@@ -1,4 +1,4 @@
-package com.tomtresansky.demo01_simplebenchmarker;
+package com.tomtresansky.simplebenchmarker;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -45,7 +45,7 @@ public final class SimpleBenchmarker {
     long average = 0L;
     
     System.out.println("Running: " + name);
-    System.out.println(String.format("Iterations: %d, Warmup Iterations: %d, Max Duration/Iteration: %d, Max Times/Iteration: %d", testIterations, warmupIterations, maxDurationMillis, maxLoopIterations));      
+    System.out.println(String.format("Iterations: %d, Warmup Iterations: %d, Max Duration/Iteration: %dms, Max Times/Iteration: %d", testIterations, warmupIterations, maxDurationMillis, maxLoopIterations));      
 
     for (int i = 0; i < totalIterations; i++) {
       long nops = 0;

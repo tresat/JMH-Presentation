@@ -1,4 +1,4 @@
-package com.tomtresansky.demo01_simplebenchmarker;
+package com.tomtresansky.simplebenchmarker;
 
 public final class Run06_Constant {
   public static void main(String... args) {

@@ -7,76 +7,41 @@
  * user guide available at https://docs.gradle.org/2.8/userguide/tutorial_java_projects.html
  */
 
-// Apply the java plugin to add support for Java
-apply plugin: 'java'
-apply plugin: 'eclipse'
+// These settings apply to all sub-projects
+subprojects {
+	// Apply the java plugin to add support for Java
+	apply plugin: 'java'
+	// And we want to auto-generate eclipse files
+	apply plugin: 'eclipse'
+	
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	version = '0.1'
+	
+	eclipse {
+		project {
+			natures += 'org.springsource.ide.eclipse.gradle.core.nature'
+		}
 
-eclipse {
-  project {
-    name = 'JMH-Presentation'
-  }
+		classpath {
+			// Override default setting and download and associate Javadoc
+			downloadJavadoc = true
+		}
+	}
+  
+	/*
+	* Remove 'default classpath' from generated build paths, else the project root becomes a source directory.
+	*/
+	eclipse.classpath.file {
+		// Closure executed after .classpath content is loaded from existing file and after gradle build information is merged
+		whenMerged { classpath ->
+			classpath.entries.removeAll { entry -> 
+				return (entry.kind == 'src' && entry.path == "/${eclipse.project.name}")
+			}
+		}
+	}
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.8'
+	gradleVersion = '2.8'
 }
-
-// Demo 01 - Simple Benchmarker
-Map<String, String> demo01runs = [
-  run01: 'Run01_Distance',
-  run02: 'Run02_Distance_Constant',
-  run03: 'Run03_Distance_Constant_Nothing',
-  run04: 'Run04_Nothing_Distance_Constant',
-  run05: 'Run05_Nothing',
-  run06: 'Run06_Constant',
-  run07: 'Run07_Constant_Using_Result'
-]
-
-demo01runs.each { taskName, taskMainClass -> 
-  task("demo01-$taskName", type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = "com.tomtresansky.demo01_simplebenchmarker.$taskMainClass"
-    
-    group = 'Demo01'
-    description = "Runs $main"
-    
-    standardOutput = new FileOutputStream(file("{$taskName}.txt"))
-  }
-}
-
-task(demo01) {
-  description = 'Runs all Demo 1 benchmarking runs'
-  group = 'Demo01'
-  
-//  doFirst {
-//    println tasks.findAll { task -> task.name.startsWith('demo01') && task.name != 'demo01' }
-//  }
-}
- 
-demo01.dependsOn {
-  tasks.findAll { task -> task.name.startsWith('demo01') && task.name != 'demo01' }
-}
-
-/*
-// Apply the java plugin to add support for Java
-apply plugin: 'java'
-
-// In this section you declare where to find the dependencies of your project
-repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-}
-
-// In this section you declare the dependencies for your production and test code
-dependencies {
-    // The production code uses the SLF4J logging API at compile time
-    compile 'org.slf4j:slf4j-api:1.7.12'
-
-    // Declare the dependency for your favourite test framework you want to use in your tests.
-    // TestNG is also supported by the Gradle Test task. Just change the
-    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
-    // 'test.useTestNG()' to your build script.
-    testCompile 'junit:junit:4.12'
-}
-*/

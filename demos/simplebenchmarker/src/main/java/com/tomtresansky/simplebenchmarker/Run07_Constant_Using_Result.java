@@ -1,4 +1,4 @@
-package com.tomtresansky.demo01_simplebenchmarker;
+package com.tomtresansky.simplebenchmarker;
 
 public final class Run07_Constant_Using_Result {
   private static double result;

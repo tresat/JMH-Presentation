@@ -1,0 +1,48 @@
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+eclipse {
+  project {
+    name = 'SimpleBenchmarker'
+  }
+}
+
+String groupName = 'Demo 1 - Simple Benchmarker'
+String taskPrefix = 'demo1'
+
+// Demo 1 - Simple Benchmarker - Class names
+Map<String, String> demo01runs = [
+  run01: 'Run01_Distance',
+  run02: 'Run02_Distance_Constant',
+  run03: 'Run03_Distance_Constant_Nothing',
+  run04: 'Run04_Nothing_Distance_Constant',
+  run05: 'Run05_Nothing',
+  run06: 'Run06_Constant',
+  run07: 'Run07_Constant_Using_Result'
+]
+
+demo01runs.each { taskName, taskMainClass -> 
+  task("$taskPrefix-$taskName", type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = "com.tomtresansky.simplebenchmarker.$taskMainClass"
+    
+    group = groupName
+    description = "Runs $main"
+    
+    doFirst {
+      File outputDir = file("${project.buildDir}${File.separator}reports${File.separator}simplebenchmarker${File.separator}")
+      outputDir.mkdirs()
+      File outputFile = new File(outputDir, "${taskName}.txt")
+      standardOutput = new FileOutputStream(outputFile)
+    }
+  }
+}
+
+task('demo1-all') {
+  description = 'Runs all Demo 1 benchmarking runs'
+  group = groupName
+}
+ 
+tasks.'demo1-all'.dependsOn {
+  tasks.findAll { task -> task.name.startsWith(taskPrefix) && task.name != taskPrefix }
+}
