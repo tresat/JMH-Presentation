@@ -2,12 +2,44 @@ plugins {
    id 'me.champeau.gradle.jmh' version '0.2.0'
 }
 
+// Apply the JMH Gradle plugin
 apply plugin: 'me.champeau.gradle.jmh'
+
+// And we want to auto-generate eclipse files
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version = '0.1'
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.8'
+}
 
 eclipse {
 	project {
 		name = 'JMH-Runner'
 	}
+  
+  classpath {
+    // Add the JMH configuration to those included when recognizing dependencies for .classpath file generation
+    plusConfigurations += [ configurations.jmh ]
+    
+    // Override default setting and download and associate Javadoc
+    downloadJavadoc = true
+    
+    /*
+     * Remove 'default classpath' from generated build paths, else the project root becomes a source directory.
+     */
+    file {
+      // Closure executed after .classpath content is loaded from existing file and after gradle build information is merged
+      whenMerged { classpath ->
+        classpath.entries.removeAll { entry ->
+          return (entry.kind == 'src' && entry.path == "/${eclipse.project.name}")
+        }
+      }
+    }
+  }
 }
 
 repositories {
@@ -61,7 +93,7 @@ dependencies {
 jmh {
     jmhVersion = '1.11.2' // 1.11.2 latest as of October 2015
     
-    include = '.*SampleBenchmark.*'
+    include = ''
     
     fork = 1
     warmupIterations = 5
@@ -71,8 +103,11 @@ jmh {
     verbosity = 'EXTRA'
 }
 
-// Use Shadow Plugin to do actual JMH jar creation
-// This will exclude these folders from the jar which contains the code to benchmark
+/* 
+ * Use Shadow Plugin to do actual JMH jar creation.  
+ * 
+ * This will exclude these folders from the generated jar which contains the code to benchmark. 
+ */
 jmhJar {
   exclude 'doc'
 }
