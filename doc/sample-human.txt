@@ -1,0 +1,38 @@
+# JMH 1.11.2 (released 77 days ago)
+# VM version: JDK 1.8.0_60, VM 25.60-b23
+# VM invoker: C:\Program Files\Java\jdk1.8.0_60\jre\bin\java.exe
+# VM options: -server -XX:+AggressiveOpts
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 3 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.tomtresansky.jmh.sample.SampleBenchmark.distanceFormulaBenchmark
+
+Forking 1 times using command: [C:\Program Files\Java\jdk1.8.0_60\jre\bin\java.exe, -server, -XX:+AggressiveOpts, -XX:CompileCommandFile=C:\Users\ttresans\AppData\Local\Temp\jmh8784351225892150715compilecommand, -cp, "C:\Users\ttresans\Projects\JMH-Presentation\jmhrunner\build\libs\jmhrunner-0.1-jmh.jar", org.openjdk.jmh.runner.ForkedMain, 127.0.0.1, 59447]
+# Run progress: 0.00% complete, ETA 00:00:20
+# Fork: 1 of 1
+# Warmup Iteration   1: 204683242.088 ops/s
+# Warmup Iteration   2: 243464787.566 ops/s
+# Warmup Iteration   3: 299569486.344 ops/s
+# Warmup Iteration   4: 310560258.134 ops/s
+# Warmup Iteration   5: 286731801.676 ops/s
+Iteration   1: 299358580.430 ops/s
+Iteration   2: 287217193.507 ops/s
+Iteration   3: 304762476.202 ops/s
+Iteration   4: 308248271.983 ops/s
+Iteration   5: 306487665.495 ops/s
+
+
+Result "distanceFormulaBenchmark":
+  301214837.523 ±(99.9%) 32743912.989 ops/s [Average]
+  (min, avg, max) = (287217193.507, 301214837.523, 308248271.983), stdev = 8503490.220
+  CI (99.9%): [268470924.535, 333958750.512] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:00:20
+
+Benchmark                                  Mode  Cnt          Score          Error  Units
+SampleBenchmark.distanceFormulaBenchmark  thrpt    5  301214837.523 ± 32743912.989  ops/s
+
+Benchmark result is saved to build\reports\jmh\results.txt

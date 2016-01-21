@@ -18,7 +18,7 @@ task wrapper(type: Wrapper) {
 
 eclipse {
 	project {
-		name = 'JMH-Runner'
+		name = 'JMH-Demo-02'
 	}
   
   classpath {
@@ -94,13 +94,6 @@ jmh {
     jmhVersion = '1.11.2' // 1.11.2 latest as of October 2015
     
     include = '' // Empty = run all benchmarks (or filter by name with a regex)
-    
-    fork = 1
-    warmupIterations = 5
-    iterations = 5
-    timeOnIteration = '3s'
-    jvmArgs = '-server -XX:+AggressiveOpts'
-    verbosity = 'EXTRA'
 }
 
 /* 

@@ -1,4 +1,4 @@
-package com.tomtresansky.jmh.sample;
+package com.tomtresansky.benchmark;
 
 import org.openjdk.jmh.annotations.Benchmark;
 
@@ -12,7 +12,7 @@ import com.tomtresansky.application.Calculator;
  *
  * @author ttresans
  */
-public class CalculatorBenchmark {
+public class BasicCalculatorBenchmark {
   /**
    * Demonstrates running a benchmark with JMH for the
    * {@link Calculator#distance(double, double, double, double)} method

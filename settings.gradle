@@ -13,5 +13,7 @@
 // To declare projects as part of a multi-project build use the 'include' method
 include 'jmhrunner'
 include 'demos/simplebenchmarker'
+include 'demos/jmhdemos/demo-01'
+include 'demos/jmhdemos/demo-02'
 
 rootProject.name = 'JMH-Presentation'

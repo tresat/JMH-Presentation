@@ -1,0 +1,21 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.genfromtxt('results.csv', delimiter=',', names=True, 
+dtype=None)
+
+x   = data['Mean']
+y   = np.arange(len(data['Benchmark']))
+err = data['Mean_Error_999']
+labels = []
+for name in data['Benchmark']:
+  labels.append(name[len('"bench.ConcurrentBench.'):-1])
+
+plt.rcdefaults()
+plt.barh(y, x, xerr=err, color='blue', ecolor='red', alpha=0.4, 
+align='center')
+plt.yticks(y, labels)
+plt.xlabel("Performance (ns/op)")
+plt.title("Benchmark")
+plt.tight_layout()
+plt.savefig('plot.png')

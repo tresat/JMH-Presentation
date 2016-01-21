@@ -1,1 +1,45 @@
+What is constant folding exactly?
+
 - Gradle task to run all of demo 1 and write timings to a file
+-- Mark task outputs properly so they get cleaned
+
+- Mode: Threads: 1 thread, will synchronize iterations
+
+- @Scope???
+
+- Benchmark classes should NOT be final
+
+
+STATE
+- State classes should NOT be final 
+-The State annotation only supports public classes.
+Instances are automatically injected into your @Benchmark method calls as arguments
+
+The @State annotation is useful in the context of concurrent benchmarks. In our case, we simply hint to JMH that x and y are thread-scoped.
+Field "x" is declared within the class not having @State annotation. This can result in unspecified behavior, and prohibited.
+Lifecycle and parameter injection. In simple cases, class fields can hold the benchmark state values.
+In more-elaborate contexts, it is better to extract those into separate @State annotated classes. Benchmark methods can then have parameters of the type of these state classes, and JMH arranges instances injection. A state class can also have its own lifecycle with a setup and a tear-down method. We can also specify whether a state holds for the whole benchmark, for one trial, or for one invocation.
+
+State objects naturally encapsulate the state on which benchmark is working on. The Scope of state object defines to which extent it is shared among the worker threads.
+
+State objects are usually injected into Benchmark methods as arguments, and JMH takes care of their instantiation and sharing. State objects may also be injected into Setup and TearDown methods of other State objects to get the staged initialization.
+
+Run programmatically - 
+Finally, we can also provide a main method to this benchmark using the JMH builder API, which mimics the command-line arguments that can be given to the self-contained JAR executable. See Listing 19.
+
+public static void main(String... args) throws RunnerException {
+  Options opts = new OptionsBuilder()
+    .include(".*.GoodBench.*")
+    .warmupIterations(20)
+    .measurementIterations(5)
+    .measurementTime(TimeValue.milliseconds(3000))
+    .jvmArgsPrepend("-server")
+    .forks(3)
+    .build();
+  new Runner(opts).run();}
+  
+Devising Concurrent Benchmarks
+-FINAL part of http://www.oracle.com/technetwork/articles/java/architect-benchmarking-2266277.html
+
+  
+  Given the two baselines, we clearly see the effects of dead-code elimination and constant folding. The only meaningful measurement of distance() is when the value is being consumed by JMH and parameters are passed through field values. All other cases converge to either the performance of returning a constant double or an empty void-returning method.
