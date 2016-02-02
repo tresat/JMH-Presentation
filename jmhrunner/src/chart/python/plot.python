@@ -1,0 +1,66 @@
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+import os.path
+
+benchmark_col = 'Benchmark'
+mode_col = 'Mode'
+threads_col = 'Threads'
+samples_col = 'Samples'
+score_col = 'Score'
+error_col = 'Error'
+unit_col = 'Unit'
+
+input_file_name = sys.argv[1]
+output_file_name = sys.argv[2]
+
+def file_len(fname):
+    with open(fname) as f:
+        for i, l in enumerate(f):
+            pass
+    return i + 1
+
+data = np.genfromtxt(input_file_name, delimiter=',', skip_header=1, names=[benchmark_col, mode_col, threads_col, samples_col, score_col, error_col, unit_col], dtype=None)
+multi_row = file_len(input_file_name) > 2
+
+x = data[score_col]
+if (multi_row):
+  y = np.arange(len(data[benchmark_col]))
+else:
+  y = np.arange(1)
+err = data[error_col]
+
+raw_labels = []
+labels = []
+single_bench_name = ''
+if (multi_row):
+  for name in data[benchmark_col]:
+    raw_labels.append(name)
+  prefix = os.path.commonprefix(raw_labels)
+  prefix = prefix[1:]
+  for name in data[benchmark_col]:
+    if (name[len(prefix)+1:-1].rfind('.') >= 0):
+      labels.append(name[1:-1])
+      prefix = 'Multiple Classes Benchmarked '
+    else:
+      labels.append(name[len(prefix)+1:-1])
+else:
+  full_name = data[benchmark_col].tostring()[1:-1]
+  prefix = full_name[0:full_name.rfind('.')] + ' '
+  single_bench_name = full_name[full_name.rfind('.')+1:]
+  labels.append(single_bench_name)
+  
+plt.rcdefaults()
+plt.figure(figsize=(20,10))
+plt.barh(y, x, xerr=err, color='blue', ecolor='red', alpha=0.4, align='center')
+
+if (multi_row):
+  plt.yticks(y, labels)
+  plt.xlabel(data[unit_col][1][1:-1])
+else:
+  plt.yticks(y, labels)
+  plt.xlabel(data[unit_col].tostring()[1:-1])
+  
+plt.title(prefix[:-1] + "     ")
+plt.tight_layout(pad=1.5)
+plt.savefig(output_file_name)

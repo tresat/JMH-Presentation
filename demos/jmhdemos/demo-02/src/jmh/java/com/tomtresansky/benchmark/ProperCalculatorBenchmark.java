@@ -66,12 +66,12 @@ public class ProperCalculatorBenchmark {
 
   @Benchmark
   public double constant_inject_return(Data data, Blackhole blackhole) {
-    return Calculator.constant(data.x1, data.y1, data.x2, data.y2); // Subject to constant folding optimizations
+    return Calculator.constant(data.x1, data.y1, data.x2, data.y2); // Properly setup benchmark - Implicit blackhole
   }
   
   @Benchmark
   public void constant_inject_consume(Data data, Blackhole blackhole) {
-    blackhole.consume(Calculator.constant(data.x1, data.y1, data.x2, data.y2)); // Properly setup benchmark
+    blackhole.consume(Calculator.constant(data.x1, data.y1, data.x2, data.y2)); // Properly setup benchmark - Explicit blackhole
   }
   
   @Benchmark

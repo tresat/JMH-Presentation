@@ -1,0 +1,28 @@
+eclipse {
+  project { name = 'JMH-Demo-UCMS' }
+}
+
+dependencies {
+  // Reference all UCMS client jars by hardcoding link to C:/ucms/dev - TODO: this is setup only for Windows
+  def ucmsJars = fileTree(dir: 'C:/ucms/dev', include: ['*.jar'])
+
+  compile ucmsJars
+  jmh ucmsJars
+}
+
+/* 
+ * Use Shadow Plugin to do actual JMH jar creation.  
+ * 
+ * This will exclude these folders from the generated jar which contains the code to benchmark. 
+ */
+jmhJar {
+  // Need to prevent java.lang.SecurityException: no manifiest section for signature file entry com/filenet/wcm/api/ConcurrentUpdateException.class
+  // by excluding all signature files from signed jars prior to repacking into the JMH jar, NOT doing this may violate some security policy on the dependency jars
+  // See http://stackoverflow.com/a/9594412
+  exclude '**/*.RSA'
+  exclude '**/*.rsa'
+  exclude '**/*.SF'
+  exclude '**/*.sf'
+  exclude '**/*.DSA'
+  exclude '**/*.dsa'
+}

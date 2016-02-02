@@ -43,3 +43,36 @@ Devising Concurrent Benchmarks
 
   
   Given the two baselines, we clearly see the effects of dead-code elimination and constant folding. The only meaningful measurement of distance() is when the value is being consumed by JMH and parameters are passed through field values. All other cases converge to either the performance of returning a constant double or an empty void-returning method.
+  
+  
+*SET OF PARAMS* - Demo?  
+Running a test with a set of parameters
+
+In many situations you need to test your code with several sets of parameters. Luckily, JMH does not force you to write N test methods if you need to test N sets of parameters. Or, to be more precise, JMH will help you if your test parameters are primitives, primitive wrappers or Strings.
+
+All you need to do is:
+
+    Define a @State object
+    Define all your parameters fields in it
+    Annotate each of these fields with @Param annotation
+
+@Param annotation expects an array of String arguments. These strings will be converted to the field type before any @Setup method invocations. Nevertheless, JMH documentation claims that these field values may not be accessible in @Setup methods.
+
+JMH will use an outer product of all @Param fields. So, if you have 2 parameters on the first field and 5 parameters on the second field, your test will be executed 2 * 5 * Forks times. 
+*SETS OF PARAMS*
+
+*THREAD GROUPS test - readers outnumber writers* - Demo?
+Thread groups – non uniform multithreading
+
+We have already mentioned that @State(Scope.Benchmark) annotation could be used to test the case of multithreaded access to the state object. The degree of concurrency will be set by the number of threads which should be used for testing.
+
+You may also need to define the non-uniform access to your state object – for example to test the “readers-writers” scenario where the number of readers is usually higher than the number of writers. JMH uses the notion of thread groups for this case.
+
+In order to setup a group of tests, you need:
+
+    Mark all your test methods with @Group(name) annotation, providing the same string name for all tests in a group (otherwise these tests will be run independently – no warning will be given!).
+    Annotate each of your tests with @GroupThreads(threadsNumber) annotation, specifying a number of threads which will run the given method.
+
+JMH will start a sum of all your @GroupThreads for the given group and will run all tests in a group concurrently in the same trial. The results will be given for the group and for each method independently. 
+*THREAD GROUPS*
+

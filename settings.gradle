@@ -9,11 +9,10 @@
  * in the user guide at https://docs.gradle.org/2.8/userguide/multi_project_builds.html
  */
 
-
 // To declare projects as part of a multi-project build use the 'include' method
-include 'jmhrunner'
 include 'demos/simplebenchmarker'
 include 'demos/jmhdemos/demo-01'
 include 'demos/jmhdemos/demo-02'
+include 'demos/jmhdemos/demo-ucms'
 
 rootProject.name = 'JMH-Presentation'

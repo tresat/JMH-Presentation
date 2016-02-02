@@ -5,43 +5,160 @@
  * This generated file contains a commented-out sample Java project to get you started.
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at https://docs.gradle.org/2.8/userguide/tutorial_java_projects.html
- */
+ */ 
+plugins { 
+  id 'me.champeau.gradle.jmh' version '0.2.0' 
+}
 
 // These settings apply to all sub-projects
 subprojects {
-	// Apply the java plugin to add support for Java
-	apply plugin: 'java'
-	// And we want to auto-generate eclipse files
-	apply plugin: 'eclipse'
-	
-	sourceCompatibility = 1.8
-	targetCompatibility = 1.8
-	version = '0.1'
-	
-	eclipse {
-		project {
-			natures += 'org.springsource.ide.eclipse.gradle.core.nature'
-		}
+  // Apply the java plugin to add support for Java
+  apply plugin: 'java'
+  // And we want to auto-generate eclipse files
+  apply plugin: 'eclipse'
 
-		classpath {
-			// Override default setting and download and associate Javadoc
-			downloadJavadoc = true
-		}
-	}
-  
-	/*
-	* Remove 'default classpath' from generated build paths, else the project root becomes a source directory.
-	*/
-	eclipse.classpath.file {
-		// Closure executed after .classpath content is loaded from existing file and after gradle build information is merged
-		whenMerged { classpath ->
-			classpath.entries.removeAll { entry -> 
-				return (entry.kind == 'src' && entry.path == "/${eclipse.project.name}")
-			}
-		}
-	}
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+  version = '0.1'
+
+  repositories { 
+    jcenter() 
+  }
+
+  eclipse {
+    project { 
+      natures += 'org.springsource.ide.eclipse.gradle.core.nature' 
+    }
+
+    classpath { 
+      // Override default setting and download and associate Javadoc
+      downloadJavadoc = true 
+    }
+  }
+
+  /*
+   * Remove 'default classpath' from generated build paths, else the project root becomes a source directory.
+   */
+  eclipse.classpath.file {
+    // Closure executed after .classpath content is loaded from existing file and after gradle build information is merged
+    whenMerged { classpath ->
+      classpath.entries.removeAll { entry ->
+        return (entry.kind == 'src' && entry.path == "/${eclipse.project.name}")
+      }
+    }
+  }
 }
 
-task wrapper(type: Wrapper) {
-	gradleVersion = '2.8'
+configure(subprojects.findAll { it.name != 'demos/simplebenchmarker' }) {
+  // Apply the JMH Gradle plugin
+  apply plugin: 'me.champeau.gradle.jmh'
+
+  eclipse.classpath {
+    // Add the JMH configuration to those included when recognizing dependencies for .classpath file generation
+    plusConfigurations += [configurations.jmh]
+
+    // Override default setting and download and associate Javadoc
+    downloadJavadoc = true
+
+    /*
+     * Remove 'default classpath' from generated build paths, else the project root becomes a source directory.
+     */
+    file {
+      // Closure executed after .classpath content is loaded from existing file and after gradle build information is merged
+      whenMerged { classpath ->
+        classpath.entries.removeAll { entry ->
+          return (entry.kind == 'src' && entry.path == "/${eclipse.project.name}")
+        }
+      }
+    }
+
+    /*
+     Setup JMH arguments in the jmh block as below.
+     
+     jmh {
+       include = 'some regular expression' // include pattern (regular expression) for benchmarks to be executed
+       exclude = 'some regular expression' // exclude pattern (regular expression) for benchmarks to be executed
+       iterations = 10 // Number of measurement iterations to do.
+       benchmarkMode = 'thrpt' // Benchmark mode. Available modes are: [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
+       batchSize = 1 // Batch size: number of benchmark method calls per operation. (some benchmark modes can ignore this setting)
+       fork = 2 // How many times to forks a single benchmark. Use 0 to disable forking altogether
+       failOnError = false // Should JMH fail immediately if any benchmark had experienced the unrecoverable error?
+       forceGC = false // Should JMH force GC between iterations?
+       jvm = 'myjvm' // Custom JVM to use when forking.
+       jvmArgs = 'Custom JVM args to use when forking.'
+       jvmArgsAppend = 'Custom JVM args to use when forking (append these)'
+       jvmArgsPrepend = 'Custom JVM args to use when forking (prepend these)'
+       humanOutputFile = project.file("${project.buildDir}/reports/jmh/human.txt") // human-readable output file
+       resultsFile = project.file("${project.buildDir}/reports/jmh/results.txt") // results file
+       operationsPerInvocation = 10 // Operations per invocation.
+       benchmarkParameters =  [:] // Benchmark parameters.
+       profilers = [] // Use profilers to collect additional data.
+       timeOnIteration = '1s' // Time to spend at each measurement iteration.
+       resultFormat = 'CSV' // Result format type (one of CSV, JSON, NONE, SCSV, TEXT)
+       synchronizeIterations = false // Synchronize iterations?
+       threads = 4 // Number of worker threads to run with.
+       threadGroups = [2,3,4] //Override thread group distribution for asymmetric benchmarks.
+       timeUnit = 'ms' // Output time unit. Available time units are: [m, s, ms, us, ns].
+       verbosity = 'NORMAL' // Verbosity mode. Available modes are: [SILENT, NORMAL, EXTRA]
+       warmup = '1s' // Time to spend at each warmup iteration.
+       warmupBatchSize = 10 // Warmup batch size: number of benchmark method calls per operation.
+       warmupForks = 0 // How many warmup forks to make for a single benchmark. 0 to disable warmup forks.
+       warmupIterations = 1 // Number of warmup iterations to do.
+       warmupMode = 'INDI' // Warmup mode for warming up selected benchmarks. Warmup modes are: [INDI, BULK, BULK_INDI].
+       warmupBenchmarks = ['.*Warmup'] // Warmup benchmarks to include in the run in addition to already selected. JMH will not measure these benchmarks, but only use them for the warmup.
+       zip64 = true // Use ZIP64 format for bigger archives
+       jmhVersion = '1.3.2' // Specifies JMH version
+       includeTests = false // Allows to include test sources into generate JMH jar, i.e. use it when benchmarks depend on the test classes.
+     }
+     */
+    jmh {
+      jmhVersion = '1.11.2' // 1.11.2 latest as of October 2015
+
+      include = '' // Empty = run all benchmarks (or filter by name with a regex)
+
+      resultFormat = 'CSV'
+      resultsFile = project.file("${project.buildDir}/reports/jmh/results.csv") // results file
+
+      jvmArgs = '-server -XX:+AggressiveOpts'
+
+      fork = 2
+      warmupIterations = 1
+      iterations = 1
+      timeOnIteration = '1s'
+    }
+
+    /* 
+     * Use Shadow Plugin to do actual JMH jar creation.  
+     * 
+     * This will exclude these folders from the generated jar which contains the code to benchmark. 
+     */
+    jmhJar { exclude 'doc' }
+
+    tasks.jmh.inputs.file jmhJar.outputs.files
+    tasks.jmh.outputs.dir project.file("${project.buildDir}/reports/jmh")
+
+    task plot(type:Exec, dependsOn:'jmh') {
+      group = 'Documentation'
+      description = 'Plots the JMH results'
+
+      def scriptFile = rootProject.file('chart/src/chart/python/plot.python')
+      def inputFile = jmh.resultsFile
+      def outputFile = project.file("${project.buildDir}/reports/jmh/plot.png")
+
+      inputs.file scriptFile
+      inputs.file jmh.resultsFile
+      outputs.file outputFile
+
+      commandLine 'python'
+      args = [ scriptFile, inputFile, outputFile ]
+
+      doFirst {
+        logger.info "Numpy is plotting results: "
+        logger.info "Input: $inputFile"
+        logger.info "Output: $outputFile"
+      }
+    }
+  }
 }
+
+task wrapper(type: Wrapper) { gradleVersion = '2.8' }
