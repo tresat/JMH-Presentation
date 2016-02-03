@@ -10,9 +10,17 @@ samples_col = 'Samples'
 score_col = 'Score'
 error_col = 'Error'
 unit_col = 'Unit'
+arg_col = 'Param: arg'
+certainty_col = 'Param: certainty'
+count_col = 'Param: count'
+size_col = 'Param: size'
+type_col = 'Param: type'
+names=[benchmark_col, mode_col, threads_col, samples_col, score_col, error_col, unit_col, arg_col, certainty_col, count_col, size_col, type_col]
 
 input_file_name = sys.argv[1]
 output_file_name = sys.argv[2]
+width = int(sys.argv[3])
+height = int(sys.argv[4])
 
 def file_len(fname):
     with open(fname) as f:
@@ -20,7 +28,11 @@ def file_len(fname):
             pass
     return i + 1
 
-data = np.genfromtxt(input_file_name, delimiter=',', skip_header=1, names=[benchmark_col, mode_col, threads_col, samples_col, score_col, error_col, unit_col], dtype=None)
+try:
+  data = np.genfromtxt(input_file_name, delimiter=',', skip_header=1, names=names, dtype=None)
+except:
+  data = np.genfromtxt(input_file_name, delimiter=',', skip_header=1, names=names[:-5], dtype=None)
+  
 multi_row = file_len(input_file_name) > 2
 
 x = data[score_col]
@@ -51,7 +63,7 @@ else:
   labels.append(single_bench_name)
   
 plt.rcdefaults()
-plt.figure(figsize=(20,10))
+plt.figure(figsize=(width, height))
 plt.barh(y, x, xerr=err, color='blue', ecolor='red', alpha=0.4, align='center')
 
 if (multi_row):
@@ -61,6 +73,9 @@ else:
   plt.yticks(y, labels)
   plt.xlabel(data[unit_col].tostring()[1:-1])
   
-plt.title(prefix[:-1] + "     ")
+if (prefix[-1] == '.'):
+  prefix = prefix[:-1]
+  
+plt.title(prefix)
 plt.tight_layout(pad=1.5)
 plt.savefig(output_file_name)

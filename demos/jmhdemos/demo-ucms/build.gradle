@@ -11,7 +11,7 @@ dependencies {
 }
 
 /* 
- * Use Shadow Plugin to do actual JMH jar creation.  
+ * Use Shadow Plugin to do actual JMH jar creation.  b
  * 
  * This will exclude these folders from the generated jar which contains the code to benchmark. 
  */

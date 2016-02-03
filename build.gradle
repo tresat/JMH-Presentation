@@ -114,7 +114,16 @@ configure(subprojects.findAll { it.name != 'demos/simplebenchmarker' }) {
     jmh {
       jmhVersion = '1.11.2' // 1.11.2 latest as of October 2015
 
-      include = '' // Empty = run all benchmarks (or filter by name with a regex)
+      if (project.hasProperty('jmhClass')) {
+        include = project.jmhClass
+        
+        // Force taske to always re-run when specifing specific class
+        tasks.jmh.outputs.upToDateWhen {
+          false
+        }
+      } else {
+        include = '' // Empty = run all benchmarks (or filter by name with a regex)
+      }
 
       resultFormat = 'CSV'
       resultsFile = project.file("${project.buildDir}/reports/jmh/results.csv") // results file
@@ -145,17 +154,21 @@ configure(subprojects.findAll { it.name != 'demos/simplebenchmarker' }) {
       def inputFile = jmh.resultsFile
       def outputFile = project.file("${project.buildDir}/reports/jmh/plot.png")
 
+      ext.plotWidth = 25
+      ext.plotHeight = 12
+      
       inputs.file scriptFile
       inputs.file jmh.resultsFile
       outputs.file outputFile
 
       commandLine 'python'
-      args = [ scriptFile, inputFile, outputFile ]
 
       doFirst {
         logger.info "Numpy is plotting results: "
         logger.info "Input: $inputFile"
         logger.info "Output: $outputFile"
+        
+        args = [ scriptFile, inputFile, outputFile, ext.plotWidth, ext.plotHeight ]
       }
     }
   }

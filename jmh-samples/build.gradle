@@ -1,0 +1,9 @@
+eclipse {
+  project { name = 'JMH-Samples' }
+}
+
+plot {
+  // Override default width and height when plotting
+  ext.plotWidth = 25
+  ext.plotHeight = 10
+}
