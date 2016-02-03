@@ -1,12 +1,12 @@
 package com.tomtresansky.simplebenchmarker;
 
-
 /**
- * Demonstrate simple benchmarking of a distance formula implementation and a constant function.
+ * Demonstrate benchmarking a distance formula implementation and a constant function.
+ * <p>
+ * The results show the contant method is <strong>SLOWER</strong> than the distance method.
  * 
  * @author ttresans
  */
-
 public final class Run02_Distance_Constant {
   public static void main(String... args) {
     SimpleBenchmarker benchmarker = new SimpleBenchmarker();

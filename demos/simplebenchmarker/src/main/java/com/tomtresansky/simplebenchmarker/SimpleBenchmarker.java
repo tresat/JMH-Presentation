@@ -14,8 +14,7 @@ import java.util.Locale;
  * 
  * @author ttresans
  *
- * @see http://www.oracle.com/technetwork/articles/java/architect-benchmarking-
- *      2266277.html
+ * @see http://www.oracle.com/technetwork/articles/java/architect-benchmarking-2266277.html
  */
 public final class SimpleBenchmarker {
   private final NumberFormat formatter = NumberFormat.getNumberInstance(Locale.US);
