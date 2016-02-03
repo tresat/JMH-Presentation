@@ -6,7 +6,7 @@ Installing matplotlib
 
 Install matplotlib on Windows
 -Install Microsoft Visual C++ Compiler for Python 2.7 
---Download from https://www.microsoft.com/en-us/download/confirmation.aspx?id=
+--Download from https://www.microsoft.com/en-us/download/details.aspx?id=44266
 --Run the installer
 -Install Matplotlib
 --download Win32 wheel from https://pypi.python.org/pypi/matplotlib/
