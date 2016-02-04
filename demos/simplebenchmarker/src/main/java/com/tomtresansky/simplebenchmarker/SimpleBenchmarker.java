@@ -25,8 +25,8 @@ public final class SimpleBenchmarker {
   private final int testIterations;
   
   public SimpleBenchmarker() {
-    this(1_000, // max duration = 1 second
-        1_000, // or 1000 iterations, whichever comes first
+    this(3_000, // max duration = 3 seconds
+        10_000, // or 10,000 iterations, whichever comes first
         5, // number of warmup iterations
         10); // number of test iterations
   }

@@ -16,7 +16,11 @@ Map<String, String> demo01runs = [
   run04: 'Run04_Nothing_Distance_Constant',
   run05: 'Run05_Nothing',
   run06: 'Run06_Constant',
-  run07: 'Run07_Constant_Using_Result'
+  run07: 'Run07_Constant_Using_Result',
+  run08: 'Run08_Distance_Using_Result',
+  run09: 'Run09_Constant_Folding',
+  run10: 'Run10_Constant_Folding',
+  run11: 'Run11_Constant_Folding'
 ]
 
 demo01runs.each { taskName, taskMainClass ->

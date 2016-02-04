@@ -1,0 +1,7 @@
+eclipse {
+  project { name = 'JMH-Demo-Null-Checks' }
+}
+
+dependencies {
+  jmh group: 'com.google.guava', name: 'guava', version: '18.0'
+}

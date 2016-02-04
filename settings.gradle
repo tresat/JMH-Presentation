@@ -14,6 +14,7 @@ include 'demos/simplebenchmarker'
 include 'demos/jmhdemos/demo-01'
 include 'demos/jmhdemos/demo-02'
 include 'demos/jmhdemos/demo-stream'
+include 'demos/jmhdemos/demo-nullcheck'
 include 'demos/jmhdemos/demo-ucms'
 include 'jmh-samples'
 

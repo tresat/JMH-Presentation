@@ -95,12 +95,13 @@ jmh {
   resultFormat = 'CSV'
   resultsFile = project.file("${project.buildDir}/reports/jmh/results.csv") // results file
 
-  jvmArgs = '-server -XX:+AggressiveOpts'
+  jvmArgs = '-server -XX:+AggressiveOpts -disablesystemassertions'
 
-  fork = 2
-  warmupIterations = 1
-  iterations = 1
-  timeOnIteration = '1s'
+  fork = 3
+  warmupIterations = 10
+  iterations = 10
+  timeOnIteration = '3s'
+  timeUnit = 'ms'
 }
 
 /*
