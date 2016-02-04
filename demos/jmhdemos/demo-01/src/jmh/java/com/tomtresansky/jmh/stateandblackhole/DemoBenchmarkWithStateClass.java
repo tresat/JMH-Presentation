@@ -1,4 +1,4 @@
-package com.tomtresansky.jmh.sample;
+package com.tomtresansky.jmh.stateandblackhole;
 
 import java.util.Random;
 
@@ -10,36 +10,36 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 
 /**
- * Benchmarks the cost of adding 2 numbers, using an inner {@link State} class.
+ * Benchmarks the cost of an operation involving 3 numbers, using an inner {@link State} class.
  * 
  * @author ttresans
  */
-public class AdditionBenchmarkWithStateClass {
+public class DemoBenchmarkWithStateClass {
   @State(Scope.Thread)
   public static class AdditionState {
-    public int x;
-    public int y;
+    long x, y, z;
 
     @Setup(Level.Iteration)
     public void prepare() {
       Random random = new Random();
-      x = random.nextInt();
-      y = random.nextInt();
+      x = random.nextInt(1000);
+      y = random.nextInt(1000);
+      z = random.nextInt(1000);
     }
 
     @TearDown(Level.Iteration)
     public void shutdown() {
-      x = y = 0; // useless in this benchmark - here is where we could close files, etc.
+      x = y = z = 0; // useless in this benchmark - here is where we could close files, etc.
     }
   }
 
   @Benchmark
-  public int baseline(AdditionState state) {
+  public long baseline(AdditionState state) {
     return state.x;
   }
 
   @Benchmark
-  public int sum(AdditionState state) {
-    return state.x + state.y;
+  public long operate(AdditionState state) {
+    return state.x + ((state.y - state.z) * state.z);
   }
 }

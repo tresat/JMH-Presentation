@@ -1,4 +1,4 @@
-package com.tomtresansky.jmh.sample;
+package com.tomtresansky.jmh.stateandblackhole;
 
 import java.util.Random;
 
@@ -11,22 +11,22 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.infra.Blackhole;
 
 /**
- * Benchmarks the cost of adding 2 numbers, using an inner {@link State} class
+ * Benchmarks the cost of operation involving 3 numbers, using an inner {@link State} class
  * and consuming the output with an explicit {@link Blackhole}.
  * 
  * @author ttresans
  */
-public class AdditionBenchmarkWithStateClassAndBlackhole {
+public class DemoBenchmarkWithStateClassAndBlackhole {
   @State(Scope.Thread)
   public static class AdditionState {
-    public int x;
-    public int y;
+    long x, y, z;
 
     @Setup(Level.Iteration)
     public void prepare() {
       Random random = new Random();
-      x = random.nextInt();
-      y = random.nextInt();
+      x = random.nextInt(1000);
+      y = random.nextInt(1000);
+      z = random.nextInt(1000);
     }
 
     @TearDown(Level.Iteration)
@@ -41,7 +41,7 @@ public class AdditionBenchmarkWithStateClassAndBlackhole {
   }
 
   @Benchmark
-  public void sum(AdditionState state, Blackhole blackhole) {
-    blackhole.consume(state.x + state.y);
+  public void operate(AdditionState state, Blackhole blackhole) {
+    blackhole.consume(state.x + ((state.y - state.z) * state.z));
   }
 }

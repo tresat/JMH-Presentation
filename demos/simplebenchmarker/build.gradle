@@ -27,6 +27,8 @@ demo01runs.each { taskName, taskMainClass ->
   task("$taskPrefix-$taskName", type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = "com.tomtresansky.simplebenchmarker.$taskMainClass"
+    
+    jvmArgs = ['-Xbatch', '-Xcomp', '-XX:CICompilerCount = 1']
 
     group = groupName
     description = "Runs $main"

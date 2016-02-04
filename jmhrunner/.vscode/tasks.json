@@ -32,6 +32,9 @@
 		},
 		{
 			"taskName": "jmh"
+		},
+        {
+			"taskName": "plot"
 		}
 	]
 }

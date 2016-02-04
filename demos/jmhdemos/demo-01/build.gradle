@@ -4,6 +4,6 @@ eclipse {
 
 plot {
   // Override default width and height when plotting
-  ext.plotWidth = 15
-  ext.plotHeight = 15
+  ext.plotWidth = 60
+  ext.plotHeight = 20
 }
