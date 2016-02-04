@@ -117,7 +117,7 @@ configure(subprojects.findAll { it.name != 'demos/simplebenchmarker' }) {
       if (project.hasProperty('jmhClass')) {
         include = project.jmhClass
         
-        // Force taske to always re-run when specifing specific class
+        // Force jmh task to always re-run when specifing specific class
         tasks.jmh.outputs.upToDateWhen {
           false
         }
@@ -130,7 +130,7 @@ configure(subprojects.findAll { it.name != 'demos/simplebenchmarker' }) {
 
       jvmArgs = '-server -XX:+AggressiveOpts -disablesystemassertions'
 
-      fork = 3
+      fork = 5
       warmupIterations = 10
       iterations = 10
       timeOnIteration = '3s'

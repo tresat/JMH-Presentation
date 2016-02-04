@@ -1,11 +1,13 @@
-What is constant folding exactly?
+ACTUAL
 
-- Gradle task to run all of demo 1 and write timings to a file
--- Mark task outputs properly so they get cleaned
+JMH generates one class per method that is annotated with @Benchmark but that is transparent to JMH users.
 
-- Mode: Threads: 1 thread, will synchronize iterations
 
-- @Scope???
+OTHER
+
+
+
+
 
 - Benchmark classes should NOT be final
 

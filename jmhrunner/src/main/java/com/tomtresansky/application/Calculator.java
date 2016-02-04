@@ -7,12 +7,4 @@ public final class Calculator {
     
     return Math.sqrt((dx * dx) + (dy * dy));
   }
-
-  public static double constant(double x1, double y1, double x2, double y2) {
-    return 0.0d;
-  }
-  
-  public static void nothing(double x1, double y1, double x2, double y2) {
-    // do nothing
-  }
 }

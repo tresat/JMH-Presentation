@@ -22,6 +22,6 @@ public class BasicCalculatorBenchmark {
    */
   @Benchmark
   public double distanceFormulaBenchmark() {
-    return Calculator.distance(0.0d, 0.0d, 10.0d, 10.0d);
+    return Calculator.distance(0.0d, 1.0d, 3.0d, 5.0d);
   }
 }

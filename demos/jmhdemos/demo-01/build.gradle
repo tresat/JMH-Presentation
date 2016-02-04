@@ -1,3 +1,9 @@
 eclipse {
   project { name = 'JMH-Demo-01' }
 }
+
+plot {
+  // Override default width and height when plotting
+  ext.plotWidth = 15
+  ext.plotHeight = 15
+}

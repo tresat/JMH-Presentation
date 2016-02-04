@@ -96,11 +96,7 @@ jmh {
   resultsFile = project.file("${project.buildDir}/reports/jmh/results.csv") // results file
 
   jvmArgs = '-server -XX:+AggressiveOpts -disablesystemassertions'
-
-  fork = 3
-  warmupIterations = 10
-  iterations = 10
-  timeOnIteration = '3s'
+  
   timeUnit = 'ms'
 }
 
@@ -122,16 +118,20 @@ task plot(type:Exec, dependsOn:'jmh') {
   def inputFile = jmh.resultsFile
   def outputFile = project.file("${project.buildDir}/reports/jmh/plot.png")
 
+  ext.plotWidth = 25
+  ext.plotHeight = 12
+  
   inputs.file scriptFile
   inputs.file jmh.resultsFile
   outputs.file outputFile
 
   commandLine 'python'
-  args = [scriptFile, inputFile, outputFile]
 
   doFirst {
     logger.info "Numpy is plotting results: "
     logger.info "Input: $inputFile"
     logger.info "Output: $outputFile"
+    
+    args = [ scriptFile, inputFile, outputFile, ext.plotWidth, ext.plotHeight ]
   }
 }
