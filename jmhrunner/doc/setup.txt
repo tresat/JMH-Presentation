@@ -1,7 +1,5 @@
 PROJECT SETUP
 
-*You may have to edit /demos/jmhdemos/demo-ucms/build.gradle to replace "C:/ucms/dev" with your local UCMS install directory (containing all the client jars) before starting.*
-
 Gradle
 
 To install gradle use GVM - http://sdkman.io/
@@ -19,5 +17,5 @@ Eclipse
 
 To install Gradle IDE for Eclipse search the Eclipse Marketplace for "Gradle Integration for Eclipse"
 
-1) Run "gradlew eclipse" from the JMH-Presentation directory to generate eclipse project files.
-2) Open eclipse, go to Project->Import, choose Type = Gradle project.  Point to the JMH-Presentation directory and include sub-projects.
+1) Run "gradlew eclipse" from the jmhrunner directory to generate eclipse project files.
+2) Open eclipse, go to Project->Import, choose Type = Gradle project.  Point to the jmhrunner directory and import it.

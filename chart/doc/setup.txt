@@ -1,8 +1,9 @@
-Based on script provided from http://www.oracle.com/technetwork/articles/java/architect-benchmarking-2266277.html
-Runs matplotlib to build charts from jmh output http://matplotlib.org/
+SETUP
+
+matplotlib is a python library used to build pretty charts from jmh output http://matplotlib.org/
 
 Installing matplotlib
--Make sure you have python 2 installed
+-Make sure you have python 2.7 installed
 
 Install matplotlib on Windows
 -Install Microsoft Visual C++ Compiler for Python 2.7 
@@ -10,7 +11,7 @@ Install matplotlib on Windows
 --Run the installer
 -Install Matplotlib
 --download Win32 wheel from https://pypi.python.org/pypi/matplotlib/
---"pip install <FILENAME>"
+--Run "pip install <FILENAME>"
 
 Install matplotlib on Linux
 -sudo apt-get install python-matplotlib

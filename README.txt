@@ -1,3 +1,17 @@
+PROJECT SETUP
+
+*You may have to edit /demos/jmhdemos/demo-ucms/build.gradle to replace "C:/ucms/dev" with your local UCMS install directory (containing all the client jars) before starting.*
+
+See the instructions in /doc/SETUP.txt
+
+RUNNING
+
+Run "gradlew tasks" from the JMH-Presentation directory to see a list of tasks
+Run "gradlew <TASK_NAME> from the JMH-Presentation directory to run that task
+Run "gradlew simple-all" to run the Simple Benchmarker demo.
+Run "gradlew jmh" to run all JMH demos - this will output human readable results.csv files in each sub-projects' /build/reports/jmh/human.txt file.
+Run "gradlew plot" to run all JMH demos and plot the results (this will require installing the matplotlib python library, see instructions in /chart/doc/SETUP.txt).
+
 PROJECT LAYOUT
 
 /chart
