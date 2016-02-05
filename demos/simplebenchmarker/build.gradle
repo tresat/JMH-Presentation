@@ -28,7 +28,7 @@ demo01runs.each { taskName, taskMainClass ->
     classpath = sourceSets.main.runtimeClasspath
     main = "com.tomtresansky.simplebenchmarker.$taskMainClass"
     
-    jvmArgs = ['-Xbatch', '-Xcomp', '-XX:CICompilerCount = 1']
+    // jvmArgs = ['-Xbatch', '-Xcomp', '-XX:CICompilerCount=2']
 
     group = groupName
     description = "Runs $main"
