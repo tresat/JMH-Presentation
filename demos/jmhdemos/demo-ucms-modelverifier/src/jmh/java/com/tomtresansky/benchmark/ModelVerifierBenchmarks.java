@@ -33,7 +33,7 @@ public class ModelVerifierBenchmarks {
 
     DMAbstractAppearance app2 = new DMAbstractAppearance();
     app2.setAppearanceId(BigDecimal.valueOf(1234314));
-    app1.setAppearanceDate(Calendar.getInstance());
+    app2.setAppearanceDate(Calendar.getInstance());
     docket.getAppearance().add(app2);
   }
   

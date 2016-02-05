@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 
 import com.google.common.collect.Lists;
 
+@State(Scope.Thread)
 public class ResizeBenchmarks {
   @Param({"1", "10", "100", "1000"})
   public int size;
