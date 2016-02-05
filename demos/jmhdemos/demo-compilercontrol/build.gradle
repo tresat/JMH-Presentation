@@ -1,0 +1,3 @@
+eclipse {
+  project { name = 'JMH-Demo-Compiler-Control' }
+}

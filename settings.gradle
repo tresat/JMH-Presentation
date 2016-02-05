@@ -11,11 +11,14 @@
 
 // To declare projects as part of a multi-project build use the 'include' method
 include 'demos/simplebenchmarker'
-include 'demos/jmhdemos/demo-01'
-include 'demos/jmhdemos/demo-02'
+include 'demos/jmhdemos/demo-basics'
+include 'demos/jmhdemos/demo-compilercontrol'
 include 'demos/jmhdemos/demo-stream'
+include 'demos/jmhdemos/demo-findonly'
 include 'demos/jmhdemos/demo-nullcheck'
+include 'demos/jmhdemos/demo-resize'
 include 'demos/jmhdemos/demo-ucms'
+include 'demos/jmhdemos/demo-ucms-modelverifier'
 include 'jmh-samples'
 
 rootProject.name = 'JMH-Presentation'

@@ -1,0 +1,20 @@
+Running: distance using result
+Iterations: 10, Warmup Iterations: 5, Max Duration/Iteration: 3000ms, Max Times/Iteration: 10000
+Run 0: | 21,395,672 ops/ms (warmup) | 
+Run 1: | 24,150,740 ops/ms (warmup) | 
+Run 2: | 23,869,372 ops/ms (warmup) | 
+Run 3: | 23,355,953 ops/ms (warmup) | 
+Run 4: | 25,001,733 ops/ms (warmup) | 
+Run 5: | 23,630,129 ops/ms | 
+Run 6: | 25,218,734 ops/ms | 
+Run 7: | 24,343,932 ops/ms | 
+Run 8: | 24,939,189 ops/ms | 
+Run 9: | 24,019,966 ops/ms | 
+Run 10: | 21,366,582 ops/ms | 
+Run 11: | 21,241,524 ops/ms | 
+Run 12: | 22,575,104 ops/ms | 
+Run 13: | 23,682,445 ops/ms | 
+Run 14: | 26,005,390 ops/ms | 
+Result: distance [ 23,702,299 ops/ms ]
+
+Result: 5.0990195135927845

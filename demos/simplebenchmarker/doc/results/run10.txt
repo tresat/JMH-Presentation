@@ -1,0 +1,20 @@
+Running: divide small values
+Iterations: 10, Warmup Iterations: 5, Max Duration/Iteration: 3000ms, Max Times/Iteration: 10000
+Run 0: | 30,676,443 ops/ms (warmup) | 
+Run 1: | 23,898,534 ops/ms (warmup) | 
+Run 2: | 24,456,007 ops/ms (warmup) | 
+Run 3: | 24,580,318 ops/ms (warmup) | 
+Run 4: | 23,511,663 ops/ms (warmup) | 
+Run 5: | 24,234,264 ops/ms | 
+Run 6: | 23,435,973 ops/ms | 
+Run 7: | 24,511,394 ops/ms | 
+Run 8: | 24,808,791 ops/ms | 
+Run 9: | 26,053,885 ops/ms | 
+Run 10: | 26,444,031 ops/ms | 
+Run 11: | 22,235,189 ops/ms | 
+Run 12: | 21,358,508 ops/ms | 
+Run 13: | 21,869,920 ops/ms | 
+Run 14: | 21,833,679 ops/ms | 
+Result: divide small values [ 23,678,563 ops/ms ]
+
+Result: 2

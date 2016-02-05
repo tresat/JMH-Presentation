@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 
@@ -17,7 +15,6 @@ import com.google.common.collect.Sets;
  * 
  * @author ttresans
  */
-@BenchmarkMode(Mode.Throughput)
 @State(Scope.Thread)
 public class Streams {
   public Set<Character> vowels = Sets.newHashSet('A', 'E', 'I', 'O', 'U');

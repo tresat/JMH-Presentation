@@ -4,9 +4,7 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -17,7 +15,6 @@ import org.openjdk.jmh.annotations.State;
  * 
  * @author ttresans
  */
-@BenchmarkMode(Mode.Throughput)
 @State(Scope.Thread)
 public class NullChecks {
   public Object instance;

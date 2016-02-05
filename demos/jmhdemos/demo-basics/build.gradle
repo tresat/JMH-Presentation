@@ -1,5 +1,5 @@
 eclipse {
-  project { name = 'JMH-Demo-01' }
+  project { name = 'JMH-Demo-Basics' }
 }
 
 plot {

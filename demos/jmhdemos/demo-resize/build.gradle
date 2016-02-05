@@ -1,5 +1,5 @@
 eclipse {
-  project { name = 'JMH-Demo-Null-Checks' }
+  project { name = 'JMH-Demo-Resize' }
 }
 
 dependencies {

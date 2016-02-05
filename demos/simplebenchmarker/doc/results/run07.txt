@@ -1,0 +1,20 @@
+Running: constant using result
+Iterations: 10, Warmup Iterations: 5, Max Duration/Iteration: 3000ms, Max Times/Iteration: 10000
+Run 0: | 24,334,656 ops/ms (warmup) | 
+Run 1: | 26,111,876 ops/ms (warmup) | 
+Run 2: | 25,358,767 ops/ms (warmup) | 
+Run 3: | 24,909,956 ops/ms (warmup) | 
+Run 4: | 24,066,376 ops/ms (warmup) | 
+Run 5: | 24,633,729 ops/ms | 
+Run 6: | 24,148,568 ops/ms | 
+Run 7: | 25,325,858 ops/ms | 
+Run 8: | 24,459,910 ops/ms | 
+Run 9: | 23,600,049 ops/ms | 
+Run 10: | 25,156,456 ops/ms | 
+Run 11: | 24,709,010 ops/ms | 
+Run 12: | 25,620,657 ops/ms | 
+Run 13: | 25,785,938 ops/ms | 
+Run 14: | 23,980,232 ops/ms | 
+Result: constant [ 24,742,040 ops/ms ]
+
+Result: 0.0

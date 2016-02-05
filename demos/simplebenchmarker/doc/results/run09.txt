@@ -1,0 +1,20 @@
+Running: divide 1s
+Iterations: 10, Warmup Iterations: 5, Max Duration/Iteration: 3000ms, Max Times/Iteration: 10000
+Run 0: | 26,602,195 ops/ms (warmup) | 
+Run 1: | 26,018,973 ops/ms (warmup) | 
+Run 2: | 26,173,358 ops/ms (warmup) | 
+Run 3: | 24,349,511 ops/ms (warmup) | 
+Run 4: | 26,225,436 ops/ms (warmup) | 
+Run 5: | 24,210,464 ops/ms | 
+Run 6: | 25,826,981 ops/ms | 
+Run 7: | 26,574,681 ops/ms | 
+Run 8: | 24,406,516 ops/ms | 
+Run 9: | 26,217,465 ops/ms | 
+Run 10: | 26,819,425 ops/ms | 
+Run 11: | 25,279,843 ops/ms | 
+Run 12: | 22,255,780 ops/ms | 
+Run 13: | 25,252,969 ops/ms | 
+Run 14: | 26,750,684 ops/ms | 
+Result: divide 1s [ 25,359,480 ops/ms ]
+
+Result: 1

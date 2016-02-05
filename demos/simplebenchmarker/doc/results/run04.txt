@@ -1,0 +1,57 @@
+Running: nothing
+Iterations: 10, Warmup Iterations: 5, Max Duration/Iteration: 3000ms, Max Times/Iteration: 10000
+Run 0: | 31,806,854 ops/ms (warmup) | 
+Run 1: | 34,754,613 ops/ms (warmup) | 
+Run 2: | 33,514,021 ops/ms (warmup) | 
+Run 3: | 34,475,408 ops/ms (warmup) | 
+Run 4: | 35,436,665 ops/ms (warmup) | 
+Run 5: | 33,800,488 ops/ms | 
+Run 6: | 34,924,712 ops/ms | 
+Run 7: | 34,931,421 ops/ms | 
+Run 8: | 35,068,332 ops/ms | 
+Run 9: | 33,289,049 ops/ms | 
+Run 10: | 33,630,179 ops/ms | 
+Run 11: | 34,017,738 ops/ms | 
+Run 12: | 35,139,050 ops/ms | 
+Run 13: | 34,667,568 ops/ms | 
+Run 14: | 34,236,910 ops/ms | 
+Result: nothing [ 34,370,544 ops/ms ]
+
+Running: distance
+Iterations: 10, Warmup Iterations: 5, Max Duration/Iteration: 3000ms, Max Times/Iteration: 10000
+Run 0: | 590,853 ops/ms (warmup) | 
+Run 1: | 668,933 ops/ms (warmup) | 
+Run 2: | 637,004 ops/ms (warmup) | 
+Run 3: | 642,065 ops/ms (warmup) | 
+Run 4: | 658,747 ops/ms (warmup) | 
+Run 5: | 628,641 ops/ms | 
+Run 6: | 583,390 ops/ms | 
+Run 7: | 667,821 ops/ms | 
+Run 8: | 649,485 ops/ms | 
+Run 9: | 663,159 ops/ms | 
+Run 10: | 671,125 ops/ms | 
+Run 11: | 655,277 ops/ms | 
+Run 12: | 610,395 ops/ms | 
+Run 13: | 610,129 ops/ms | 
+Run 14: | 642,176 ops/ms | 
+Result: distance [ 638,159 ops/ms ]
+
+Running: constant
+Iterations: 10, Warmup Iterations: 5, Max Duration/Iteration: 3000ms, Max Times/Iteration: 10000
+Run 0: | 246,187 ops/ms (warmup) | 
+Run 1: | 260,428 ops/ms (warmup) | 
+Run 2: | 250,069 ops/ms (warmup) | 
+Run 3: | 246,034 ops/ms (warmup) | 
+Run 4: | 264,544 ops/ms (warmup) | 
+Run 5: | 253,616 ops/ms | 
+Run 6: | 240,893 ops/ms | 
+Run 7: | 252,019 ops/ms | 
+Run 8: | 268,532 ops/ms | 
+Run 9: | 276,578 ops/ms | 
+Run 10: | 264,018 ops/ms | 
+Run 11: | 238,013 ops/ms | 
+Run 12: | 263,603 ops/ms | 
+Run 13: | 257,472 ops/ms | 
+Run 14: | 264,514 ops/ms | 
+Result: constant [ 257,925 ops/ms ]
+

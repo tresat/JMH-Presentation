@@ -1,3 +1,11 @@
 eclipse {
   project { name = 'JMH-Samples' }
 }
+
+plot {
+  if (!project.hasProperty('jmhClass')) {
+    // Override default width and height when plotting all results (not a single specific class)
+    ext.plotWidth = 60
+    ext.plotHeight = 500
+  }
+}
